@@ -80,60 +80,50 @@ void OPTION2() {
 
 
 /* Case 2: MISS--NON-MATCHING TAGS */
-        if (cache[block].tag != tag)
+    if (cache[block].tag != tag) {
 /* Print message of Read/Write miss */
-            if (read_write == 0)
-                printf("Miss read: \n");
-                else {
-                    printf("Miss write. \n");
-                }
-
-/* Overwrite tag */
-                cache[block].tag = tag;
-/* Transfer equivalent block of main memory to cache--one word at a time */
-                for (k = 0; k < block_size; k++) {
-                    cache[block].block[k] = mainmemory[base + k];
-                }
-
-
-
-        }
-
-
-/* Case 3:HIT DUE TO MATCHING TAGS */
-    else if (cache[block].tag == tag) {
-
-
-
-/* print message of Read/Write hit*/
-        if (read_write == 0) {
-            printf("Hit read. \n");
-            else {
-                printf("Hit write. \n");
-            }
+        if (read_write == 0)
+            printf("Miss read: \n");
+        else {
+            printf("Miss write. \n");
         }
     }
 
+/* Overwrite tag */
+    cache[block].tag = tag;
+/* Transfer equivalent block of main memory to cache--one word at a time */
+    for (k = 0; k < block_size; k++) {
+        cache[block].block[k] = mainmemory[base + k];
+    }
 
+    /* Case 3:HIT DUE TO MATCHING TAGS */
+    else if (cache[block].tag == tag) {
+        /* print message of Read/Write hit*/
+        if (read_write == 0) {
+            printf("Hit read. \n");
+            else
+            printf("Hit write. \n");
+        }
+    }
 /* reference cache word, transfer data to/from cache depending on read/write signal*/
-    if (read_write == 0) /* read */
-{
-    data = cache[block].block[word];
-    else /* write */{
+    if (read_write == 0) { /* read */
+
+        data = cache[block].block[word];
+        else /* write */{
 /* reverse above calculation */
-    cache[block].block[word] =
-    data;
+            cache[block].block[word] = data;
 /* update main memory if you are doing a write -- write through */
-    mainmemory[mainmemoryaddress] = data;
-}
+            mainmemory[mainmemoryaddress] = data;
+        }
 
 /* Print message of word, block, tag, data value */
-printf("***************************************************** \n");
-printf("| Tag: %d | Block: %d |Word: %d | Data Value: %d | \n", tag, block, word, data);
-printf("*************************************************************************************\n");
+        printf("***************************************************** \n");
+        printf("| Tag: %d | Block: %d |Word: %d | Data Value: %d | \n", tag, block, word, data);
+        printf("*************************************************************************************\n");
 
-return;
+        return;
 
+    }
 }
 
 /****************************************************************/
@@ -164,14 +154,14 @@ int main() {
                 OPTION2();
                 break;
 
-                case 3:
-                    printf("Now quitting\n");
+            case 3:
+                printf("Now quitting\n");
                 break;
 
-                default:
-                    printf("Your input was invalid. Try again: \n");
-            }
-
+            default:
+                printf("Your input was invalid. Try again: \n");
         }
-        return 1;
+
     }
+    return 1;
+}
