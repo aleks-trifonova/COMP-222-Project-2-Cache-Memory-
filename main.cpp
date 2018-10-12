@@ -97,34 +97,32 @@ void OPTION2() {
     }
 
     /* Case 3:HIT DUE TO MATCHING TAGS */
-    else if (cache[block].tag == tag) {
-        /* print message of Read/Write hit*/
-        if (read_write == 0) {
-            printf("Hit read. \n");
-            else
-            printf("Hit write. \n");
-        }
-    }
+     if (cache[block].tag == tag)
+         /* print message of Read/Write hit*/
+         if (read_write == 0)
+             printf("Hit read. \n");
+             else
+                 printf("Hit write. \n");
+
+
 /* reference cache word, transfer data to/from cache depending on read/write signal*/
-    if (read_write == 0) { /* read */
+    if (read_write == 0)  /* read */
 
         data = cache[block].block[word];
-        else /* write */{
+        else /* write */
 /* reverse above calculation */
             cache[block].block[word] = data;
 /* update main memory if you are doing a write -- write through */
             mainmemory[mainmemoryaddress] = data;
-        }
+
 
 /* Print message of word, block, tag, data value */
         printf("***************************************************** \n");
         printf("| Tag: %d | Block: %d |Word: %d | Data Value: %d | \n", tag, block, word, data);
-        printf("*************************************************************************************\n");
-
+        printf("*************************************************************************************\n");}
         return;
 
-    }
-}
+
 
 /****************************************************************/
 int main() {
