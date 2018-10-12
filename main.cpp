@@ -11,12 +11,12 @@ struct node {
         *cache = NULL;
 typedef struct node line;
 /* define dynamic array for main memory */
-int *mainmemory = null;
+int *mainmemory = NULL;
 
 /****************************************************************/
 void "OPTION1"(){
 /* declare local var's */
-int a, b
+int a, b;
 /* Prompt for main memory size, cache size, block size */
 printf("Please enter main memory size: ");
 scanf(%d, &mainmemory_size);
