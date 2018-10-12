@@ -68,35 +68,37 @@ void OPTION2() {
 
 /* Translate main mem addr to cache addr fields & create a base address */
     base = (mainmemoryaddress / block_size) * block_size;
-    tag =(mainmemoryaddress / cache_size);
+    tag = (mainmemoryaddress / cache_size);
     word = (mainmemoryaddress % block_size);
-   block = ((mainmemoryaddress % cache_size) / block_size);
+    block = ((mainmemoryaddress % cache_size) / block_size);
 
 /* Case 1: MISS--BLOCK NOT ALLOCATED */
-    if (cache[block].tag == -1) {
+    if (cache[block].tag == -1)
 
 /* Allocate cache block based on block size */
         cache[block].block = (int *) malloc(block_size * sizeof(int));
-    }
+
 
 /* Case 2: MISS--NON-MATCHING TAGS */
-    if (cache[block].tag != tag) {
+        if (cache[block].tag != tag)
 /* Print message of Read/Write miss */
-        if (read_write == 0) {
-            printf("Miss read: \n");
-            else {
-                printf("Miss write. \n");
-            }
+            if (read_write == 0)
+                printf("Miss read: \n");
+                else {
+                    printf("Miss write. \n");
+                }
+
 /* Overwrite tag */
-            cache[block].tag = tag;
+                cache[block].tag = tag;
 /* Transfer equivalent block of main memory to cache--one word at a time */
-            for (k = 0; k < block_size; k++) {
-                cache[block].block[k] = mainmemory[base + k];
-            }
+                for (k = 0; k < block_size; k++) {
+                    cache[block].block[k] = mainmemory[base + k];
+                }
+
+
+
         }
 
-
-    }
 
 /* Case 3:HIT DUE TO MATCHING TAGS */
     else if (cache[block].tag == tag) {
@@ -115,24 +117,24 @@ void OPTION2() {
 
 /* reference cache word, transfer data to/from cache depending on read/write signal*/
     if (read_write == 0) /* read */
-    {
-        data = cache[block].block[word];
-    } else /* write */
-    {
+{
+    data = cache[block].block[word];
+    else /* write */{
 /* reverse above calculation */
-        cache[block].block[word] = data;
+    cache[block].block[word] =
+    data;
 /* update main memory if you are doing a write -- write through */
-        mainmemory[mainmemoryaddress] = data;
-    }
+    mainmemory[mainmemoryaddress] = data;
+}
 
 /* Print message of word, block, tag, data value */
-    printf("***************************************************** \n");
-    printf("| Tag: %d | Block: %d |Word: %d | Data Value: %d | \n", tag, block, word, data);
-    printf("*************************************************************************************\n");
+printf("***************************************************** \n");
+printf("| Tag: %d | Block: %d |Word: %d | Data Value: %d | \n", tag, block, word, data);
+printf("*************************************************************************************\n");
 
-    return;
-};
+return;
 
+}
 
 /****************************************************************/
 int main() {
@@ -154,11 +156,11 @@ int main() {
         scanf("%d", &userschoice);
 
         switch (userschoice) {
-            case 1: {
+            case 1:
                 OPTION1();
                 break;
-            }
-            case 2: {
+
+            case 2:
                 OPTION2();
                 break;
 
@@ -173,6 +175,3 @@ int main() {
         }
         return 1;
     }
-
-
-}
